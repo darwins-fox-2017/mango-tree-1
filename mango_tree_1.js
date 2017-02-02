@@ -37,34 +37,37 @@ class MangoTree {
 
   // Produce some mangoes
   produceMangoes() {
-    console.log(Randomize.getRandomNumber());
-    for (var i = 0; i < Randomize.getRandomNumber(); i++) {
-      this.fruits.push(new Mango())
-      // console.log(this.fruits);
+    for (let i = 0; i < Randomize.getRandomNumber(); i++) {
+      let fruit = new Mango(this.age)
+      this.fruits.push(fruit)
     }
-
   }
 
   // Get some fruits
   harvest() {
     let goodCount = 0
     let badCount = 0
-    for (var i = 0; i < this.fruits.length; i++) {
-      if (this.fruits[i].quality == 'Good') {
-        goodCount++
-      } else {
-        badCount++
+    let fruitCount = 0
+    console.log('jumlah fruit : ', this.fruits.length);
+    for (let i = 0; i < this.fruits.length; i++) {
+      if (this.fruits[i].harvestedAt == this.age) {
+        if (this.fruits[i].quality == 'Good') {
+          goodCount++
+        } else {
+          badCount++
+        }
+        fruitCount++
       }
     }
-    return `${goodCount} Good and ${badCount} Bad`
-
+    return `Fruits harvested : ${fruitCount} : ${goodCount} Good and ${badCount} Bad`
   }
 }
 
 class Mango {
   // Produce a mango
-  constructor() {
+  constructor(age) {
     this.quality = Randomize.getRandomQuality()
+    this.harvestedAt = age
   }
 }
 
@@ -95,7 +98,7 @@ console.log('The tree is a alive!');
 do {
   mariMain.grow()
   mariMain.produceMangoes()
-  console.log(`Year : ${mariMain.getAge()} - Height : ${mariMain.height.toFixed(2)} | Fruits harvested : ${mariMain.harvest()}`);
+  console.log(`Year : ${mariMain.getAge()} - Height : ${mariMain.height.toFixed(2)} | ${mariMain.harvest()}`);
 
 } while (mariMain.getAge() < 20);
 console.log('The tree has meet its end ):');
