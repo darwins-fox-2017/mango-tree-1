@@ -1,32 +1,58 @@
 "use strict"
 
 class MangoTree {
-  
-  // Initialize a new MangoTree
+
   constructor() {
+    this.umur=0;
+    this.tinggi=0;
+    this.max_fruits = 20;
+    this.fruits=0;
+    this.harvested=0;
+    this.health=true;
   }
 
-  // Get current states here
+  getAge(){
+    return this.umur;
+  }
 
-  // Grow the tree
+  getHeight(){
+    return this.tinggi
+  }
+
+  getFruits(){
+    return this.fruits
+  }
+
+  getHealthyStatus(){
+    return this.health
+  }
+
   grow() {
+    var tinggi=Math.random();
+    this.umur++;
+    if(this.umur<=10){
+      this.tinggi+=tinggi;
+    }
+    if(this.umur>=20) {
+      this.health=false;
+    }
+    this.fruits = Math.floor((Math.random() * 9) + 1);
   }
 
-  // Produce some mangoes
-  produceMangoes() {
-  }
-
-  // Get some fruits
   harvest() {
+    var good = Math.floor((Math.random() * this.fruits) + 1);
+    var bad = this.fruits - good;
+    return this.fruits+' ('+good+' good, '+bad+' bad)';
   }
 }
 
-class Mango {
-  // Produce a mango
-  constructor() {
-  }
-}
+var tree = new MangoTree()
+console.log(`The tree is alive! :smile:`)
 
-function getRandomNumber() {
-}
+do {
+    tree.grow();
 
+    console.log("[Year "+tree.getAge()+" Report] Height = "+tree.getHeight()+" Meter | Fruits Harvested = "+tree.harvest());
+} while (tree.getHealthyStatus() != false)
+
+console.log(`The tree has met its end. :sad:`);
