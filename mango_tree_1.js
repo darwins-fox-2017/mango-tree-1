@@ -7,8 +7,8 @@ class MangoTree {
     this._age = 0
     this._height = 0.0
     this._fruits = []
-
     this._healty = true
+
     this._harvest = 0
     this._bad = 0
     this._good = 0
@@ -48,8 +48,20 @@ class MangoTree {
 
   // Get some fruits
   harvest() {
-
-
+    this._bad = 0
+    this._good = 0
+    this._harvest = this._fruits.length
+    // console.log(this._fruits);
+    if (this._fruits != 0) {
+      for (var i = 0; i < this._fruits.length; i++) {
+        if (this._fruits[i].quality == 'Bad') {
+          this._bad += 1
+        }else {
+          this._good += 1
+        }
+      }
+    }
+    this._fruits = []
   }
 }
 
@@ -73,8 +85,9 @@ function getRandomNumber() {
 
 var tree = new MangoTree()
 
+// tree.grow()
+// console.log(tree.produceMangoes());
 console.log(`These tree is alive! :smile:`);
-
 do {
   tree.grow()
   tree.produceMangoes()
